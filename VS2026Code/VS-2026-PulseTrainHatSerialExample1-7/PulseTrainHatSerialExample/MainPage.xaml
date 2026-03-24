@@ -1,0 +1,225 @@
+﻿<Page
+    x:Class="PulseTrainHatSerialExample.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PulseTrainHatSerialExample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <CollectionViewSource x:Name="DeviceListSource"/>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="51" Margin="177,0,0,0" TextWrapping="Wrap" Text="Stand Alone Pulse Train Hat Serial Example" VerticalAlignment="Top" Width="682" FontFamily="Calibri" FontSize="36"/>
+        <Button x:Name="comPortInput" Content="Connect" Click="comPortInput_Click" Margin="775,48,0,0" Width="94" Height="32" VerticalAlignment="Top" Background="#B296F50D"/>
+        <Button x:Name="closeDevice" Margin="775,85,0,0" Content="Disconnect" Click="closeDevice_Click" Width="94" Height="32" VerticalAlignment="Top" Background="#B2FB0F04"/>
+        <ListBox x:Name="ConnectDevices" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Visible" ItemsSource="{Binding Source={StaticResource DeviceListSource}}" Background="#FFDAD8D8" Margin="23,66,0,0" Height="43" Width="726" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Id}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBox x:Name="sendText" Margin="31,559,0,0" Background="#FFA9F55D" Width="358" Height="32" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBlock Text="Write Data:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="41,538,0,0"/>
+        <TextBox x:Name="rcvdText" Margin="31,615,0,0" Background="#FFF98989" Width="358" Height="32" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBlock Text="Read Data:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="41,593,0,0"/>
+        <Button x:Name="sendTextButton" Content="Write" Click="sendTextButton_Click" Margin="394,559,0,0" Width="56" Height="32" VerticalAlignment="Top"/>
+        <TextBox
+            x:Name="status" TextWrapping="Wrap" IsReadOnly="True" Width="392" Height="32" HorizontalAlignment="Left" VerticalAlignment="Top" 
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" BorderBrush="White" Margin="31,504,0,0" Background="#FF89C1F9"/>
+        <Button x:Name="Firmware1" Content="Firmware" Click="Firmware_Click" Margin="740,633,0,0" Width="88" Height="32" VerticalAlignment="Top" Background="#B2F1F109"/>
+        <TextBlock Text="X-Axis" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="703,147,0,0" FontSize="24"/>
+        <TextBox x:Name="XFreq" HorizontalAlignment="Left" Height="32" Margin="7,180,0,0" TextWrapping="Wrap" Text="011000.000" VerticalAlignment="Top" Width="91"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="7,139,0,0" RenderTransformOrigin="0.585,-1.95" Height="38" Text="Frequency X&#xD;&#xA;125kHz max"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="129,139,0,0" RenderTransformOrigin="0.585,-1.95">
+            <Run Text="Pulse "/>
+            <LineBreak/>
+            <Run Text="Count X"/>
+        </TextBlock>
+        <TextBox x:Name="Xpulsecount" HorizontalAlignment="Left" Height="32" Margin="103,180,0,0" TextWrapping="Wrap" Text="0000080000" VerticalAlignment="Top" Width="96"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="418,139,0,0" RenderTransformOrigin="0.585,-1.95" Width="54" Text="Ramp &#xD;&#xA;Divide X"/>
+        <TextBox x:Name="Xdir" HorizontalAlignment="Left" Height="32" Margin="204,180,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" MinWidth="40" Width="64" MaxLength="1"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="208,139,0,0" RenderTransformOrigin="0.585,-1.95" TextWrapping="Wrap">
+            <Run Text="      "/>
+            <Run Text="X"/>
+            <LineBreak/>
+            <Run Text="Direction"/>
+        </TextBlock>
+        <TextBox x:Name="Xrampdivide" HorizontalAlignment="Left" Height="32" Margin="413,180,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="64"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="487,139,0,0" RenderTransformOrigin="0.585,-1.95" Width="55" Text="Ramp &#xD;&#xA;Pause X"/>
+        <TextBox x:Name="Xramppause" HorizontalAlignment="Left" Height="32" Margin="483,180,0,0" TextWrapping="Wrap" Text="010" VerticalAlignment="Top" Width="64"/>
+        <TextBlock Text="Y-Axis" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="703,229,0,0" FontSize="24"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="7,219,0,0" RenderTransformOrigin="0.585,-1.95" Height="44" Text="Frequency Y&#xD;&#xA;125kHz max"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="129,217,0,0" RenderTransformOrigin="0.585,-1.95">
+            <Run Text="Pulse "/>
+            <LineBreak/>
+            <Run Text="Count Y"/>
+        </TextBlock>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="418,219,0,0" RenderTransformOrigin="0.585,-1.95" Width="94" Text="Ramp &#xD;&#xA;Divide Y"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,217,0,0" RenderTransformOrigin="0.585,-1.95">
+            <Run Text="      "/>
+            <Run Text="Y "/>
+            <LineBreak/>
+            <Run Text="Direction"/>
+        </TextBlock>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="490,219,0,0" RenderTransformOrigin="0.585,-1.95" Width="64" Text="Ramp &#xD;&#xA;Pause Y"/>
+        <TextBlock Text="Z-Axis" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="703,309,0,0" FontSize="24"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="7,299,0,0" RenderTransformOrigin="0.585,-1.95" Height="39" Text="Frequency Z&#xD;&#xA;125kHz max"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="129,298,0,0" RenderTransformOrigin="0.585,-1.95">
+            <Run Text="Pulse "/>
+            <LineBreak/>
+            <Run Text="Count Z"/>
+        </TextBlock>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="418,299,0,0" RenderTransformOrigin="0.585,-1.95" Width="94" Text="Ramp &#xD;&#xA;Divide Z"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="208,299,0,0" RenderTransformOrigin="0.585,-1.95">
+            <Run Text="      "/>
+            <Run Text="Z "/>
+            <LineBreak/>
+            <Run Text="Direction"/>
+        </TextBlock>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="487,299,0,0" RenderTransformOrigin="0.585,-1.95" Width="94" Text="Ramp &#xD;&#xA;Pause Z"/>
+        <TextBlock Text="E-Axis" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="703,389,0,0" FontSize="24"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="7,378,0,0" RenderTransformOrigin="0.585,-1.95" Height="39" Text="Frequency E&#xD;&#xA;125kHz max"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="129,377,0,0" RenderTransformOrigin="0.585,-1.95">
+            <Run Text="Pulse "/>
+            <LineBreak/>
+            <Run Text="Count E"/>
+        </TextBlock>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="418,379,0,0" RenderTransformOrigin="0.585,-1.95" Width="94" Text="Ramp &#xD;&#xA;Divide E"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,378,0,0" RenderTransformOrigin="0.585,-1.95" Text="      E&#xD;&#xA;Direction"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="487,379,0,0" RenderTransformOrigin="0.585,-1.95" Width="94" Text="Ramp &#xD;&#xA;Pause E"/>
+        <TextBox x:Name="Ypulsecount" HorizontalAlignment="Left" Height="32" Margin="103,260,0,0" TextWrapping="Wrap" Text="0000080000" VerticalAlignment="Top" Width="96"/>
+        <TextBox x:Name="Ydir" HorizontalAlignment="Left" Height="32" Margin="204,260,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" MinWidth="0" Width="64" MaxLength="1"/>
+        <TextBox x:Name="Yrampdivide" HorizontalAlignment="Left" Height="32" Margin="413,260,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="64"/>
+        <TextBox x:Name="Yramppause" HorizontalAlignment="Left" Height="32" Margin="483,260,0,0" TextWrapping="Wrap" Text="010" VerticalAlignment="Top" Width="64"/>
+        <TextBox x:Name="Zpulsecount" HorizontalAlignment="Left" Height="32" Margin="103,340,0,0" TextWrapping="Wrap" Text="0000080000" VerticalAlignment="Top" Width="96"/>
+        <TextBox x:Name="Zdir" HorizontalAlignment="Left" Height="32" Margin="204,340,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" MinWidth="44" Width="64" MaxLength="1"/>
+        <TextBox x:Name="Zrampdivide" HorizontalAlignment="Left" Height="32" Margin="413,340,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="64"/>
+        <TextBox x:Name="Zramppause" HorizontalAlignment="Left" Height="32" Margin="483,340,0,0" TextWrapping="Wrap" Text="010" VerticalAlignment="Top" Width="64"/>
+        <TextBox x:Name="YFreq" HorizontalAlignment="Left" Height="32" Margin="7,260,0,0" TextWrapping="Wrap" Text="011000.000" VerticalAlignment="Top" Width="91"/>
+        <TextBox x:Name="ZFreq" HorizontalAlignment="Left" Height="32" Margin="7,340,0,0" TextWrapping="Wrap" Text="011000.000" VerticalAlignment="Top" Width="91"/>
+        <TextBox x:Name="EFreq" HorizontalAlignment="Left" Height="32" Margin="7,420,0,0" TextWrapping="Wrap" Text="011000.000" VerticalAlignment="Top" Width="91"/>
+        <TextBox x:Name="Epulsecount" HorizontalAlignment="Left" Height="32" Margin="103,420,0,0" TextWrapping="Wrap" Text="0000080000" VerticalAlignment="Top" Width="96"/>
+        <TextBox x:Name="Edir" HorizontalAlignment="Left" Height="32" Margin="204,420,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" MinWidth="44" Width="64" MaxLength="1"/>
+        <TextBox x:Name="Erampdivide" HorizontalAlignment="Left" Height="32" Margin="413,420,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="64"/>
+        <TextBox x:Name="Eramppause" HorizontalAlignment="Left" Height="32" Margin="483,420,0,0" TextWrapping="Wrap" Text="010" VerticalAlignment="Top" Width="64"/>
+        <TextBox x:Name="FormattedX" HorizontalAlignment="Left" Margin="698,180,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Background="#FFA9F55D" Width="245" Height="54"/>
+        <TextBlock Text="Formatted Command" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="774,151,0,0" RenderTransformOrigin="0.585,-1.95" Width="148"/>
+        <Button x:Name="SetX" Content="Set X" HorizontalAlignment="Left" Height="32" Margin="953,180,0,0" VerticalAlignment="Top" Width="67" Click="SetX_Click" FontWeight="Bold"/>
+        <Button x:Name="SetY" Content="Set Y" HorizontalAlignment="Left" Height="32" Margin="953,260,0,0" VerticalAlignment="Top" Width="67" Click="SetY_Click" FontWeight="Bold"/>
+        <TextBlock Text="Formatted Command" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="774,237,0,0" RenderTransformOrigin="0.585,-1.95" Width="148"/>
+        <TextBlock Text="Formatted Command" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="774,314,0,0" RenderTransformOrigin="0.585,-1.95" Width="148"/>
+        <TextBlock Text="Formatted Command" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="774,395,0,0" RenderTransformOrigin="0.585,-1.95" Width="148"/>
+        <TextBox x:Name="FormattedY" HorizontalAlignment="Left" Height="54" Margin="698,260,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="245" Background="#FFA9F55D"/>
+        <TextBox x:Name="FormattedZ" HorizontalAlignment="Left" Height="50" Margin="698,340,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="249" Background="#FFA9F55D"/>
+        <TextBox x:Name="FormattedE" HorizontalAlignment="Left" Height="50" Margin="698,420,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="249" Background="#FFA9F55D"/>
+        <Button x:Name="SetZ" Content="Set Z" HorizontalAlignment="Left" Height="32" Margin="953,340,0,0" VerticalAlignment="Top" Width="67" Click="SetZ_Click" FontWeight="Bold"/>
+        <Button x:Name="SetE" Content="Set E" HorizontalAlignment="Left" Height="32" Margin="953,420,0,0" VerticalAlignment="Top" Width="67" Click="SetE_Click" FontWeight="Bold"/>
+        <Button x:Name="StartX" Content="Start X" Height="32" Margin="549,476,0,0" VerticalAlignment="Top" Width="88" Click="StartX_Click" Background="#B296F50D" FontWeight="Bold"/>
+        <Button x:Name="StartY" Content="Start Y" Height="32" Margin="644,476,0,0" VerticalAlignment="Top" Width="88" Click="StartY_Click" Background="#B296F50D" FontWeight="Bold"/>
+        <Button x:Name="StartZ" Content="Start Z" Height="32" Margin="740,476,0,0" VerticalAlignment="Top" Width="88" Click="StartZ_Click" Background="#B296F50D" FontWeight="Bold"/>
+        <Button x:Name="StartE" Content="Start E" Height="32" Margin="833,476,0,0" VerticalAlignment="Top" Width="88" Click="StartE_Click" Background="#B296F50D" FontWeight="Bold"/>
+        <Button x:Name="StartAll" Content="Start All" Height="32" Margin="926,476,0,0" VerticalAlignment="Top" Width="88" Click="StartAll_Click" Background="#B296F50D" FontWeight="Bold"/>
+        <Button x:Name="StopX" Content="Stop X" Height="32" Margin="549,549,0,0" VerticalAlignment="Top" Width="88" Click="StopX_Click" Background="#B2FF210B" FontWeight="Bold"/>
+        <Button x:Name="StopY" Content="Stop Y" Height="32" Margin="644,549,0,0" VerticalAlignment="Top" Width="88" Click="StopY_Click" Background="#B2FB0F04" FontWeight="Bold"/>
+        <Button x:Name="StopZ" Content="Stop Z" Height="32" Margin="740,549,0,0" VerticalAlignment="Top" Width="88" Click="StopZ_Click" Background="#B2FB0F04" FontWeight="Bold"/>
+        <Button x:Name="StopE" Content="Stop E" Height="32" Margin="833,549,0,0" VerticalAlignment="Top" Width="88" Click="StopE_Click" Background="#B2FB0F04" FontWeight="Bold"/>
+        <Button x:Name="StopAll" Content="Stop All" Height="32" Margin="926,549,0,0" VerticalAlignment="Top" Width="88" Click="StopAll_Click" Background="#B2FB0F04" FontWeight="Bold"/>
+        <Button x:Name="GetXPulses" Content="XPulses" Height="32" Margin="548,594,0,0" VerticalAlignment="Top" Width="88" Click="GetXPulses_Click" Background="#B2F1F109"/>
+        <Button x:Name="GetYPulses" Content="YPulses" Height="32" Margin="644,593,0,0" VerticalAlignment="Top" Width="88" Click="GetYPulses_Click" Background="#B2F1F109"/>
+        <Button x:Name="GetZPulses" Content="ZPulses" Height="32" Margin="740,594,0,0" VerticalAlignment="Top" Width="88" Click="GetZPulses_Click" Background="#B2F1F109"/>
+        <Button x:Name="GetEPulses" Content="EPulses" Height="32" Margin="833,593,0,0" VerticalAlignment="Top" Width="88" Click="GetEPulses_Click" Background="#B2F1F109"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="289,139,0,0" RenderTransformOrigin="0.585,-1.95" Text="Ramp&#xD;&#xA;Up X"/>
+        <TextBox x:Name="XRampUp" HorizontalAlignment="Left" Height="32" Margin="273,180,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" MinWidth="40" Width="64" MaxLength="1"/>
+        <TextBox x:Name="YRampUp" HorizontalAlignment="Left" Height="32" Margin="273,260,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" MinWidth="0" Width="64" MaxLength="1"/>
+        <TextBox x:Name="ZRampUp" HorizontalAlignment="Left" Height="32" Margin="273,340,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" MinWidth="44" Width="64" MaxLength="1"/>
+        <TextBox x:Name="ERampUp" HorizontalAlignment="Left" Height="32" Margin="273,420,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" MinWidth="44" Width="64" RenderTransformOrigin="2.182,0.531" MaxLength="1"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="342,139,0,0" RenderTransformOrigin="0.585,-1.95" Text="Ramp &#xD;&#xA;Down X"/>
+        <TextBox x:Name="XRampDown" HorizontalAlignment="Left" Height="32" Margin="344,180,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" MinWidth="40" Width="64" MaxLength="1"/>
+        <TextBox x:Name="YRampDown" HorizontalAlignment="Left" Height="32" Margin="344,260,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" MinWidth="0" Width="64" MaxLength="1"/>
+        <TextBox x:Name="ZRampDown" HorizontalAlignment="Left" Height="32" Margin="344,340,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" MinWidth="44" Width="64" MaxLength="1"/>
+        <TextBox x:Name="ERampDown" HorizontalAlignment="Left" Height="32" Margin="344,420,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" MinWidth="44" Width="64" RenderTransformOrigin="2.182,0.531" MaxLength="1"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="289,219,0,0" RenderTransformOrigin="0.585,-1.95" Text="Ramp&#xD;&#xA;Up Y"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="342,219,0,0" RenderTransformOrigin="0.585,-1.95" Text="Ramp &#xD;&#xA;Down Y"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="289,299,0,0" RenderTransformOrigin="0.585,-1.95" Text="Ramp&#xD;&#xA;Up Z"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="342,299,0,0" RenderTransformOrigin="0.585,-1.95" Text="Ramp &#xD;&#xA;Down Z"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="289,379,0,0" RenderTransformOrigin="0.585,-1.95" Text="Ramp&#xD;&#xA;Up E"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="342,379,0,0" RenderTransformOrigin="0.585,-1.95" Text="Ramp &#xD;&#xA;Down E"/>
+        <Button x:Name="Calcit" Content="Just Format" Height="32" Margin="918,139,0,0" VerticalAlignment="Top" Width="96" Click="Calcit_Click" RenderTransformOrigin="-1.294,0.406"/>
+        <Button x:Name="GetADC1" Content="ADC1" Height="32" Margin="549,633,0,0" VerticalAlignment="Top" Width="88" Click="GetADC1_Click" Background="#B2F1F109"/>
+        <Button x:Name="GetADC2" Content="ADC2" Height="32" Margin="644,633,0,0" VerticalAlignment="Top" Width="88" Click="GetADC2_Click" Background="#B2F1F109"/>
+        <TextBlock Text="Request Data:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="455,600,0,0"/>
+        <TextBlock Text="Send Command:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="437,483,0,0"/>
+        <TextBlock Text="Use the Set buttons before using the Start buttons below" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="484,120,0,0" FontWeight="Bold" Foreground="#FF0B2CFB"/>
+        <Button x:Name="Aux1On" Content="Aux1 On" HorizontalAlignment="Left" Height="32" Margin="549,675,0,0" VerticalAlignment="Top" Width="81" Click="Aux1On_Click" Background="#9996F50D"/>
+        <Button x:Name="Aux1Off" Content="Aux1 Off" HorizontalAlignment="Left" Height="32" Margin="549,715,0,0" VerticalAlignment="Top" Width="81" Click="Aux1Off_Click" Background="#99FF210B"/>
+        <Button x:Name="Aux2On" Content="Aux2 On" HorizontalAlignment="Left" Height="32" Margin="644,675,0,0" VerticalAlignment="Top" Width="82" Click="Aux2On_Click" Background="#9996F50D"/>
+        <Button x:Name="Aux2Off" Content="Aux2 Off" HorizontalAlignment="Left" Height="32" Margin="644,715,0,0" VerticalAlignment="Top" Width="82" Click="Aux2Off_Click" Background="#99FF210B"/>
+        <Button x:Name="Aux3On" Content="Aux3 On" HorizontalAlignment="Left" Height="32" Margin="740,675,0,0" VerticalAlignment="Top" Width="83" Click="Aux3On_Click" Background="#9996F50D"/>
+        <Button x:Name="Aux3Off" Content="Aux3 Off" HorizontalAlignment="Left" Height="32" Margin="740,715,0,0" VerticalAlignment="Top" Width="83" Click="Aux3Off_Click" Background="#99FF210B"/>
+        <TextBlock Text="All Commands are sent as Instant Commands and not Buffer Commands in this example" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="177,41,0,0" Foreground="#FFF90B0B"/>
+        <Button x:Name="TurnOffReceivedReplies" Content="Turn Off Received Replies." Margin="23,715,0,0" Width="206" Height="32" VerticalAlignment="Top" Background="#99FF210B" Click="TurnOffReceivedReplies_Click"/>
+        <Button x:Name="TurnOnReceivedReplies" Content="Turn On Received Replies." Margin="23,675,0,0" Width="206" Height="32" VerticalAlignment="Top" Background="#9996F50D" Click="TurnOnReceivedReplies_Click"/>
+        <Button x:Name="TurnOffCompletedReplies" Content="Turn Off Completed Replies." Margin="244,715,0,0" Width="206" Height="32" VerticalAlignment="Top" Background="#99FF210B" Click="TurnOffCompletedReplies_Click"/>
+        <Button x:Name="TurnOnCompletedReplies" Content="Turn On Completed Replies." Margin="244,675,0,0" Width="206" Height="32" VerticalAlignment="Top" Background="#9996F50D" Click="TurnOnCompletedReplies_Click"/>
+        <TextBlock Text="Status:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="41,484,0,0"/>
+        <Button x:Name="Reset" Content="Reset" HorizontalAlignment="Left" Height="62" Margin="464,685,0,0" VerticalAlignment="Top" Width="66" Click="Reset_Click" Background="#99FF210B"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="469,640,0,0" RenderTransformOrigin="0.585,-1.95" Width="61" Text="Reset&#xA;PTHAT"/>
+        <Button x:Name="PauseX" Content="Pause X" Height="32" Margin="549,513,0,0" VerticalAlignment="Top" Width="88" FontWeight="Bold" Click="PauseX_Click" Background="#B20D81F5">
+            <Button.Resources>
+                <Color x:Key="pauseblue">#B20D81F5</Color>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="PauseY" Content="PauseY" Height="32" Margin="644,513,0,0" VerticalAlignment="Top" Width="88" Background="#B20D81F5" FontWeight="Bold" Click="PauseY_Click"/>
+        <Button x:Name="PauseZ" Content="Pause Z" Height="32" Margin="740,513,0,0" VerticalAlignment="Top" Width="88" Background="#B20D81F5" FontWeight="Bold" Click="PauseZ_Click"/>
+        <Button x:Name="PauseE" Content="Pause E" Height="32" Margin="833,513,0,0" VerticalAlignment="Top" Width="88" Background="#B20D81F5" FontWeight="Bold" Click="PauseE_Click"/>
+        <Button x:Name="PauseAll" Content="Pause All" Height="32" Margin="926,513,0,0" VerticalAlignment="Top" Width="88" Background="#B20D81F5" FontWeight="Bold" Click="PauseAll_Click"/>
+        <TextBlock Text="Convert RPM to Hz" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="876,626,0,0" FontWeight="Bold" FontStyle="Italic"/>
+        <TextBox x:Name="RPM" HorizontalAlignment="Left" Height="32" Margin="903,652,0,0" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="94" TextChanged="RPM_TextChanged"/>
+        <TextBox x:Name="StepsPerRev" HorizontalAlignment="Left" Height="32" Margin="903,689,0,0" TextWrapping="Wrap" Text="800" VerticalAlignment="Top" Width="94" TextChanged="StepsPerRev_TextChanged"/>
+        <TextBox x:Name="HZresult" HorizontalAlignment="Left" Height="32" Margin="903,726,0,0" TextWrapping="Wrap" Text="013333.33" VerticalAlignment="Top" Width="100"/>
+        <TextBlock Text="RPM" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="867,656,0,0"/>
+        <TextBlock Text="Result" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="858,731,0,0" RenderTransformOrigin="0.032,4.45"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="830,685,0,0" RenderTransformOrigin="0.585,-1.95" Text="Pulse per&#xD;&#xA;Revolution"/>
+        <TextBlock Text="Hz" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1003,739,0,0" RenderTransformOrigin="4.29,2.55"/>
+        <Image x:Name="PTHAT" HorizontalAlignment="Left" Height="56" Margin="31,5,0,0" VerticalAlignment="Top" Width="77" Source="Assets/PTHATlogo.jpg"/>
+        <TextBlock Text="http://www.pthat.com" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="833,18,0,0" FontWeight="Bold" FontStyle="Italic"/>
+        <TextBlock Text="Leave Turned On for all features of this application to work." HorizontalAlignment="Left" VerticalAlignment="Top" Margin="23,652,0,0" FontWeight="Bold" Foreground="#FF0B2CFB"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="552,139,0,0" RenderTransformOrigin="0.585,-1.95" Text="Link X&#xD;&#xA;to ADC"/>
+        <TextBox x:Name="Xadc" HorizontalAlignment="Left" Height="32" Margin="553,180,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" MinWidth="40" Width="64" MaxLength="1"/>
+        <TextBox x:Name="Yadc" HorizontalAlignment="Left" Height="32" Margin="553,260,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" MinWidth="0" Width="64" MaxLength="1"/>
+        <TextBox x:Name="Zadc" HorizontalAlignment="Left" Height="32" Margin="553,340,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" MinWidth="44" Width="64" MaxLength="1"/>
+        <TextBox x:Name="Eadc" HorizontalAlignment="Left" Height="32" Margin="553,420,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" MinWidth="44" Width="64" RenderTransformOrigin="2.182,0.531" MaxLength="1"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="552,219,0,0" RenderTransformOrigin="0.585,-1.95" Text="Link Y&#xD;&#xA;to ADC"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="552,299,0,0" RenderTransformOrigin="0.585,-1.95" Text="Link Z&#xD;&#xA;to ADC"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="552,379,0,0" RenderTransformOrigin="0.585,-1.95" Text="Link E&#xD;&#xA;to ADC"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="623,139,0,0" RenderTransformOrigin="0.585,-1.95" Text="Enable&#xA;Polarity"/>
+        <TextBox x:Name="EnableX" HorizontalAlignment="Left" Height="32" Margin="624,180,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" MinWidth="40" Width="64" TextChanged="EnableX_TextChanged" MaxLength="1"/>
+        <TextBox x:Name="EnableY" HorizontalAlignment="Left" Height="32" Margin="624,260,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" MinWidth="0" Width="64" TextChanged="EnableY_TextChanged" MaxLength="1"/>
+        <TextBox x:Name="EnableZ" HorizontalAlignment="Left" Height="32" Margin="624,340,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" MinWidth="44" Width="64" TextChanged="EnableZ_TextChanged" MaxLength="1"/>
+        <TextBox x:Name="EnableE" HorizontalAlignment="Left" Height="32" Margin="624,420,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" MinWidth="44" Width="64" RenderTransformOrigin="2.182,0.531" TextChanged="EnableE_TextChanged" MaxLength="1"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="623,299,0,0" RenderTransformOrigin="0.585,-1.95">
+            <Run Text="Enable"/>
+            <LineBreak/>
+            <Run Text="Polarity"/>
+        </TextBlock>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="623,379,0,0" RenderTransformOrigin="0.585,-1.95">
+            <Run Text="Enable"/>
+            <LineBreak/>
+            <Run Text="Polarity"/>
+        </TextBlock>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="626,219,0,0" RenderTransformOrigin="0.585,-1.95">
+            <Run Text="Enable"/>
+            <LineBreak/>
+            <Run Text="Polarity"/>
+        </TextBlock>
+        <Button x:Name="ToggleEnableLine" Content="Toggle Enable Line" Height="32" Margin="244,469,0,0" VerticalAlignment="Top" Width="176" Background="#9996F50D" Click="ToggleEnableLine_Click"/>
+        <Grid HorizontalAlignment="Left" Height="88" Margin="878,46,0,0" VerticalAlignment="Top" Width="130">
+            <RadioButton x:Name="LowSpeedBaud" Content="115200 Baud" HorizontalAlignment="Left" Height="34" Margin="10,10,0,0" VerticalAlignment="Top" Width="73" GroupName="Baud" IsChecked="True"/>
+            <RadioButton x:Name="HighSpeedBaud" Content="806400 Baud" HorizontalAlignment="Left" Height="34" Margin="10,38,0,0" VerticalAlignment="Top" Width="73" GroupName="Baud"/>
+        </Grid>
+
+    </Grid>
+</Page>
